@@ -8,6 +8,30 @@
   <link rel="stylesheet" href="pomodoro.css">
 </head>
 <body>
+  <!-- task -->
+  <form class="task">
+    <input list="browsers" name="browser">
+      <datalist id="browsers">
+        <option value="Coding! What else?!">
+        <option value="Summer 2017 6-packs training...">
+        <option value="Game of Thrones">
+        <option value="Googling: what can you do in 25 minutes">
+        <option value="Think about the meaning of life">
+      </datalist>
+    <!-- set time -->
+    <label>Timer:</label>
+    <input type="number" name="quantity" min="1" max="59" class="time" value="25">
+    <button type="reset">Reset</button>
+  </form>
+
+  <!-- timer -->
+  <div class="timer"></div>
+
+  <!-- start and stop the timer -->
+  <button type="button">
+    Start!
+  </button>
+
   <script src="pomodoro.js"></script>
 </body>
 </html>
