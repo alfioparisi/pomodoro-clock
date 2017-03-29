@@ -79,16 +79,27 @@ Timer.prototype.restart = function() {
   this.checkmarks = 0;
 };
 
+var init;
+
 // Take the button
-var btn = document.querySelector("[type='button']");
+var btnGo = document.querySelector(".start");
 // Wait for click
-btn.addEventListener("click", function() {
+btnGo.addEventListener("click", function() {
   // Take the user input
   userTime = document.querySelector(".time").value;
   // Make a timer instance
   var timer = new Timer(userTime);
   // Call countDown() every second
-  setInterval(function() {
+  init = setInterval(function() {
     timer.countDown();
   }, 1000);
+  // Make the ID of setInterval available globally, so to use clearInterval()
+  return init;
 });
+
+var btnStop = document.querySelector(".stop");
+btnStop.addEventListener("click", function() {
+  clearInterval(init);
+});
+
+// TODO: make a stop button, style
