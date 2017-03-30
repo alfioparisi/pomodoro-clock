@@ -20,8 +20,8 @@ var Timer = function(startTime) {
   // checkmark
   this.checkmarks = 0;
   // Breaks
-  this.shortBreak = 1 * 60; //TODO 5
-  this.break = 2 * 60; //TODO 15
+  this.shortBreak = 5 * 60;
+  this.break = 15 * 60;
 };
 
 // Our timer can count down
@@ -29,7 +29,7 @@ Timer.prototype.countDown = function() {
   // Until we reach 0 seconds...
   if (this.time > this.endTime) {
     // ...Take away one second
-    this.time -= 10;  //TODO: put back to --
+    this.time -= 1;
   }
   this.update();
 };
@@ -126,5 +126,3 @@ btnReset.addEventListener("click", function() {
   timerDiv.textContent = "Set your time";
   clearInterval(init);
 });
-
-// TODO: style
