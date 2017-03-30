@@ -1,0 +1,11 @@
+.timer-container {
+  width: 450px;
+  height: 470px;
+  margin: 0 auto;
+}
+
+.timer {
+  width: 450px;
+  height: 450px;
+  line-height: 450px;
+}
