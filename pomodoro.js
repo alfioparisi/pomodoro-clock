@@ -124,5 +124,6 @@ btnStop.addEventListener("click", function() {
 var btnReset = document.querySelector("button[type='reset']");
 btnReset.addEventListener("click", function() {
   timerDiv.textContent = "Set your time";
+  intervalCalls = 0;
   clearInterval(init);
 });
