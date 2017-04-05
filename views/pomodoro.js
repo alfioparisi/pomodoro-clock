@@ -12,7 +12,9 @@ app.PomodoroView = Backbone.View.extend({
     // Whenever the 'button.reset' is clicked.
     "click .reset": "getUserTime",
     // Start the timer on 'button.start' click.
-    "click .start": "startTimer"
+    "click .start": "startTimer",
+    // Stop the timer on 'button.stop' click.
+    "click .stop": "stopTimer"
   },
 
   initialize: function() {
@@ -41,7 +43,7 @@ app.PomodoroView = Backbone.View.extend({
     this.render();
   },
 
-  // Get the user time and updated the model property.
+  // Get the user time and updated the model property. Also stop the timer.
   // Called by the "change" event on the 'this.$input' and by the "click" event
   // on 'button.reset'.
   getUserTime: function() {
@@ -50,12 +52,14 @@ app.PomodoroView = Backbone.View.extend({
       // Turn it into seconds.
       time: userTime * 60
     });
+    this.stopTimer();
   },
 
   // Run the timer by calling "this.countDown" every second.
   // Called by the "click" event on 'button.start'.
   startTimer: function() {
-    return setInterval(this.countDown, 1000);
+    this.interval = setInterval(this.countDown, 1000);
+    return this.interval;
   },
 
   // Set how the timer works.
@@ -69,7 +73,13 @@ app.PomodoroView = Backbone.View.extend({
       });
     // Otherwise, if the time is 0, stop counting down.
     } else {
-      clearInterval(this.startTimer);
+      this.stopTimer();
     }
+  },
+
+  // Stop the timer count down.
+  // Called by the "click" on 'button.stop', "this.countDown", "this.getUserTime".
+  stopTimer: function() {
+    return clearInterval(this.interval);
   }
 });
