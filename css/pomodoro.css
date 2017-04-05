@@ -37,6 +37,7 @@ h1 {
   background: linear-gradient(to left, rgba(240, 0, 0, 0.64) , rgba(220, 40, 30, 0.96));
   /* gradients from https://uigradients.com/# */
   border-radius: 50%;
+  will-change: transform;
 }
 
 .task {
