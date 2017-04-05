@@ -7,3 +7,5 @@ app.Pomodoro = Backbone.Model.extend({
     time: 25
   }
 });
+// Make the pomodoro model.
+var pomodoro = new app.Pomodoro();

@@ -6,9 +6,8 @@ app.PomodoroView = Backbone.View.extend({
 
   // Initialize the starting time to be the user chosen time.
   initialize: function() {
-    // Create the pomodoro model.
-    var pomodoro = new app.Pomodoro();
-    // If the user has chosen its own time, tell it to the pomodoro.
-    // TODO
+    // _.bindAll(this, "");
+    // // If the user has chosen its own time, tell it to the pomodoro.
+    // // TODO
   }
 });
