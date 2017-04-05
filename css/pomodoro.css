@@ -27,7 +27,7 @@ h1 {
 .timer {
   width: 100vw;
   height: 100vw;
-  font-size: 50px;
+  font-size: 35px;
   line-height: 100vw;
   text-align: center;
   color: rgb(85, 176, 97);
@@ -38,6 +38,19 @@ h1 {
   /* gradients from https://uigradients.com/# */
   border-radius: 50%;
   will-change: transform;
+}
+
+.checkmark-1 {
+  box-shadow: inset 0 0 0 8px #db6053;
+}
+.checkmark-2 {
+  box-shadow: inset 0 0 0 8px #db6053, inset 0 0 0 16px #8cbc93;
+}
+.checkmark-3 {
+  box-shadow: inset 0 0 0 8px #db6053, inset 0 0 0 16px #8cbc93, inset 0 0 0 24px #db6053;
+}
+.checkmark-4 {
+  box-shadow: inset 0 0 0 8px #db6053, inset 0 0 0 16px #8cbc93, inset 0 0 0 24px #db6053, inset 0 0 0 32px #8cbc93;
 }
 
 .task {
