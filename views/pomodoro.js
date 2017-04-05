@@ -10,20 +10,22 @@ app.PomodoroView = Backbone.View.extend({
     // Whenever the value of the input change.
     "change input[type='number']": "getUserTime",
     // Whenever the 'button.reset' is clicked.
-    "click .reset": "getUserTime"
+    "click .reset": "getUserTime",
+    // Start the timer on 'button.start' click.
+    "click .start": "startTimer"
   },
 
   initialize: function() {
     // Use Underscore.js to keep the context of the functions of this view tyed to
     // the view itself.
-    _.bindAll(this, "render", "displayAsTimer", "getUserTime");
+    _.bindAll(this, "render", "displayAsTimer", "getUserTime", "countDown");
     // Get the input field responsible of setting the time.
     this.$input = this.$("input[type='number']");
     // Wait for model changes.
     this.listenTo(pomodoro, "change", this.displayAsTimer);
   },
 
-  // Updates the HTML.
+  // Update the HTML.
   // Called by "this.displayAsTimer".
   render: function() {
     this.$(".timer").html(this.displayedTime);
@@ -48,5 +50,26 @@ app.PomodoroView = Backbone.View.extend({
       // Turn it into seconds.
       time: userTime * 60
     });
+  },
+
+  // Run the timer by calling "this.countDown" every second.
+  // Called by the "click" event on 'button.start'.
+  startTimer: function() {
+    return setInterval(this.countDown, 1000);
+  },
+
+  // Set how the timer works.
+  // Called by "this.startTimer".
+  countDown: function() {
+    // Check if there is still time.
+    if (pomodoro.get("time") > 0) {
+      // Decrese the time property by 1.
+      pomodoro.set({
+        time: pomodoro.get("time") - 1
+      });
+    // Otherwise, if the time is 0, stop counting down.
+    } else {
+      clearInterval(this.startTimer);
+    }
   }
 });
