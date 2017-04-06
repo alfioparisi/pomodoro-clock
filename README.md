@@ -16,4 +16,3 @@ Version of the Pomodoro clock made with Backbone.
 ### todo
 
 * let the user choose the break length.
-* add a basic todo-list.
