@@ -222,7 +222,7 @@ li {
 
 .completed {
   text-decoration: line-through;
-  color: #29b228;
+  background-color: #29b228;
 }
 
 .destroy {
@@ -231,7 +231,7 @@ li {
   height: 15px;
   right: 35px;
   top: 25%;
-  background-color: cc2222;
+  background-color: #cc2222;
 }
 
 .toggle {
