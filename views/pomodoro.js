@@ -14,13 +14,15 @@ app.PomodoroView = Backbone.View.extend({
     // Start the timer on 'button.start' click.
     "click .start": "startTimer",
     // Stop the timer on 'button.stop' click.
-    "click .stop": "stopTimer"
+    "click .stop": "stopTimer",
+    // Slide in the todo-pane on 'a.toggle-todo' click.
+    "click .todo-toggle": "toggleTodo"
   },
 
   initialize: function() {
     // Use Underscore.js to keep the context of the functions of this view tyed to
     // the view itself.
-    _.bindAll(this, "render", "displayAsTimer", "getUserTime", "countDown");
+    _.bindAll(this, "render", "displayAsTimer", "getUserTime", "countDown", "stopTimer");
     // Get the input field responsible of setting the time.
     this.$input = this.$("input[type='number']");
     // Wait for model changes.
@@ -133,5 +135,10 @@ app.PomodoroView = Backbone.View.extend({
     this.$(".start").css("pointer-events", "auto");
     // Stop timer.
     return clearInterval(this.interval);
+  },
+
+  toggleTodo: function(evt) {
+    evt.preventDefault();
+    app.TodoPane.slideInOut();
   }
 });
