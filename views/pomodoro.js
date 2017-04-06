@@ -47,11 +47,16 @@ app.PomodoroView = Backbone.View.extend({
   // Called by the "change" event on the 'this.$input' and by the "click" event
   // on 'button.reset'.
   getUserTime: function() {
-    var userTime = this.$input.val();
+    // Get the user custom time.
+    this.userTime = this.$input.val();
+    // Set the attributes.
     pomodoro.set({
       // Turn it into seconds.
-      time: userTime * 60
+      time: this.userTime * 60,
+      // Reset the checkmarks.
+      checkmarks: 0
     });
+    // Stop the timer.
     this.stopTimer();
   },
 
@@ -67,13 +72,43 @@ app.PomodoroView = Backbone.View.extend({
   countDown: function() {
     // Check if there is still time.
     if (pomodoro.get("time") > 0) {
-      // Decrese the time property by 1.
+      // Decrese the time attribute by 1.
       pomodoro.set({
-        time: pomodoro.get("time") - 1
+        time: pomodoro.get("time") - 10
       });
-    // Otherwise, if the time is 0, stop counting down.
-    } else {
-      this.stopTimer();
+    // Otherwise, check the number of checkmarks.
+    } else if (pomodoro.get("time") <= 0) {
+      // If it's not break time and...
+      if (!pomodoro.get("isBreak") && pomodoro.get("checkmarks") < 4) {
+        // ...there are less than 4 checkmarks, set a short break.
+        pomodoro.set({
+          time: pomodoro.get("shortBreak"),
+          checkmarks: pomodoro.get("checkmarks") + 1,
+          isBreak: true
+        });
+        // Show the checkmarks.
+        this.$(".timer").addClass("checkmark-" + pomodoro.get("checkmarks"));
+        this.$(".timer").removeClass("checkmark-" + (pomodoro.get("checkmarks") - 1));
+      } else if (!pomodoro.get("isBreak") && pomodoro.get("checkmarks") < 5) {
+        // If it's 4, set a long break.
+        pomodoro.set({
+          time: pomodoro.get("longBreak"),
+          checkmarks: pomodoro.get("checkmarks") + 1,
+          isBreak: true
+        });
+      // If it's break time, but we still have max 4 checkmarks...
+      } else if (pomodoro.get("isBreak") && pomodoro.get("checkmarks") < 5) {
+        // ...restart counting.
+        pomodoro.set({
+          time: this.userTime * 60,
+          isBreak: false
+        });
+      // Finally, if we're done, stop the timer.
+      } else {
+        this.stopTimer();
+        // And remove the checkmarks.
+        this.$(".timer").removeClass("checkmark-4");
+      }
     }
   },
 
