@@ -54,7 +54,7 @@ app.PomodoroView = Backbone.View.extend({
   // Called by the "change" event on the 'this.$input' and by the "click" event
   // on 'button.reset'.
   getUserTime: function() {
-    // Get the user custom time.
+    // Get the user custom time. If there is none, use the default.
     this.userTime = this.$input.val();
     // Set the attributes.
     pomodoro.set({
@@ -70,6 +70,10 @@ app.PomodoroView = Backbone.View.extend({
   // Run the timer by calling "this.countDown" every second.
   // Called by the "click" event on 'button.start'.
   startTimer: function() {
+    // Default user time.
+    if (this.userTime === undefined) {
+      this.userTime = 25 * 60;
+    }
     // Disable 'button.start'.
     this.$(".start").css("pointer-events", "none");
     // Start the timer.
@@ -84,7 +88,7 @@ app.PomodoroView = Backbone.View.extend({
     if (pomodoro.get("time") > 0) {
       // Decrese the time attribute by 1.
       pomodoro.set({
-        time: pomodoro.get("time") - 10
+        time: pomodoro.get("time") - 1
       });
     // Otherwise, check the number of checkmarks.
     } else if (pomodoro.get("time") <= 0) {

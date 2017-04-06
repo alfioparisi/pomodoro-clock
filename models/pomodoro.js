@@ -10,8 +10,8 @@ app.Pomodoro = Backbone.Model.extend({
     // Check it's break time.
     isBreak: false,
     // Breaks between work-times.
-    shortBreak: 0.5 * 60,
-    longBreak: 1 * 60
+    shortBreak: 5 * 60,
+    longBreak: 15 * 60
   }
 });
 // Make the pomodoro model, so it is globally available.
