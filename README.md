@@ -9,6 +9,11 @@ There are six steps in the technique:
 * After four pomodoros, take a longer break (15–30 minutes), reset your checkmark count to zero, then go to step 1.
 [Wikipedia](https://en.wikipedia.org/wiki/Pomodoro_Technique)
 
-#### issues
+### general
 
-Restarting the timer after Stop throws errors in the console
+Version of the Pomodoro clock made with Backbone.
+
+### todo
+
+* let the user choose the break length.
+* add a basic todo-list.
