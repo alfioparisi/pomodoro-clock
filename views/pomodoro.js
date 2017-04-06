@@ -74,7 +74,7 @@ app.PomodoroView = Backbone.View.extend({
   startTimer: function() {
     // Default user time.
     if (this.userTime === undefined) {
-      this.userTime = 25 * 60;
+      this.userTime = 25;
     }
     // Disable 'button.start'.
     this.$(".start").css("pointer-events", "none");

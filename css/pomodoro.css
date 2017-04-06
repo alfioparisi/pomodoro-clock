@@ -215,12 +215,23 @@ li {
   margin-right: 15px;
 }
 
+.editing {
+  background-color: #64b871;
+  border: 2px solid #329d0d;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #29b228;
+}
+
 .destroy {
   position: absolute;
   width: 15px;
   height: 15px;
   right: 35px;
   top: 25%;
+  background-color: cc2222;
 }
 
 .toggle {
