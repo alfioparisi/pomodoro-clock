@@ -30,6 +30,13 @@ app.PomodoroView = Backbone.View.extend({
   // Update the HTML.
   // Called by "this.displayAsTimer".
   render: function() {
+    // Message.
+    if (!pomodoro.get("isBreak")) {
+      this.$(".msg").html("work to do");
+    } else {
+      this.$(".msg").html("time for a break");
+    }
+    // Timer.
     this.$(".timer").html(this.displayedTime);
   },
 
