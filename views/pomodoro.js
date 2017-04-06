@@ -63,6 +63,9 @@ app.PomodoroView = Backbone.View.extend({
   // Run the timer by calling "this.countDown" every second.
   // Called by the "click" event on 'button.start'.
   startTimer: function() {
+    // Disable 'button.start'.
+    this.$(".start").css("pointer-events", "none");
+    // Start the timer.
     this.interval = setInterval(this.countDown, 1000);
     return this.interval;
   },
@@ -115,6 +118,9 @@ app.PomodoroView = Backbone.View.extend({
   // Stop the timer count down.
   // Called by the "click" on 'button.stop', "this.countDown", "this.getUserTime".
   stopTimer: function() {
+    // Enable 'button.start'.
+    this.$(".start").css("pointer-events", "auto");
+    // Stop timer.
     return clearInterval(this.interval);
   }
 });
