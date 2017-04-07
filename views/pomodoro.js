@@ -63,7 +63,9 @@ app.PomodoroView = Backbone.View.extend({
       // Turn it into seconds.
       time: this.userTime * 60,
       // Reset the checkmarks.
-      checkmarks: 0
+      checkmarks: 0,
+      // Reset the breaks.
+      isBreak: false
     });
     // Stop the timer.
     this.stopTimer();
