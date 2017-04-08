@@ -67,6 +67,10 @@ app.PomodoroView = Backbone.View.extend({
       // Reset the breaks.
       isBreak: false
     });
+    // Remove any checkmark.
+    this.$(".timer").removeClass(function(index, className) {
+      return (className.match(/(^|\s)checkmark-\d+/g) || []).join(" ");
+    });
     // Stop the timer.
     this.stopTimer();
   },
