@@ -35,7 +35,7 @@ function Header(props) {
 function Pomodoro(props) {
   return (
     <section className="timer-container">
-      <div className={props.checkmarkClass}>{props.time}</div>
+      <div className={props.checkmarkClass}>{props.timer}</div>
       <div className="msg">{props.msg}</div>
     </section>
   );
@@ -57,9 +57,9 @@ class App extends React.Component {
     // Get the context. It's required es6 syntax.
     super();
     this.state = {
-      time: 25,
-      shortBreak: 5,
-      longBreak: 15,
+      time: 25 * 60,
+      shortBreak: 5 * 60,
+      longBreak: 15 * 60,
       isRunning: false,
       isBreak: false,
       checkmarks: 0
@@ -77,9 +77,9 @@ class App extends React.Component {
     evt.preventDefault();
     if (this.state.isRunning) clearInterval(this.int);
     this.setState({
-      time: 25,
-      shortBreak: 5,
-      longBreak: 15,
+      time: 25 * 60,
+      shortBreak: 5 * 60,
+      longBreak: 15 * 60,
       isRunning: false,
       isBreak: false,
       checkmarks: 0
@@ -91,7 +91,7 @@ class App extends React.Component {
   */
   changeTime(evt, val) {
     // Save the time given by the user because we'll need it later.
-    if (val === 'time') this.userTime = evt.target.value || 25;
+    if (val === 'time') this.userTime = evt.target.value * 60 || 25 * 60;
     this.setState({
       // If the time provided by the user is less than 0, set it to 0.
       // Use es6 syntax '[]' to compute the string 'val' to the property key of
@@ -174,6 +174,7 @@ class App extends React.Component {
     } // time === 0 if
   }
   render() {
+    const timer = `${Math.floor(this.state.time / 60)} : ${Math.floor(this.state.time % 60)}`;
     const msg = this.state.isRunning ? this.state.isBreak ? 'Break' : 'Work to do' : '';
     const checkmarkClass = classNames({
       'timer': true,
@@ -185,8 +186,8 @@ class App extends React.Component {
     return (
       <div className="container">
         <Header onSubmit={this.handleSubmit} isRunning={this.state.isRunning}
-          time={this.state.time} changeTime={(evt, val) => this.changeTime(evt, val)} />
-        <Pomodoro time={this.state.time} isRunning={this.state.isRunning} msg={msg}
+          time={this.state.time / 60} changeTime={(evt, val) => this.changeTime(evt, val)} />
+        <Pomodoro timer={timer} isRunning={this.state.isRunning} msg={msg}
         checkmarkClass={checkmarkClass} />
         <Footer isRunning={this.state.isRunning} onClick={this.handleClick} />
       </div>
