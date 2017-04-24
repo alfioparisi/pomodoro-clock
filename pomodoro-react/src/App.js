@@ -57,7 +57,8 @@ class App extends React.Component {
       shortBreak: 5,
       longBreak: 15,
       isRunning: false,
-      isBreak: false
+      isBreak: false,
+      checkmarks: 0
     };
     // Bind the callbacks to not lose the context.
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -75,7 +76,9 @@ class App extends React.Component {
       time: 25,
       shortBreak: 5,
       longBreak: 15,
-      isRunning: false
+      isRunning: false,
+      isBreak: false,
+      checkmarks: 0
     });
   }
   /** Change the state of the timer based on the user input.
@@ -83,6 +86,8 @@ class App extends React.Component {
   * @param {string} : either 'time', 'shortBreak' or 'longBreak'
   */
   changeTime(evt, val) {
+    // Save the time given by the user because we'll need it later.
+    if (val === 'time') this.userTime = evt.target.value || 25;
     this.setState({
       // If the time provided by the user is less than 0, set it to 0.
       // Use es6 syntax '[]' to compute the string 'val' to the property key of
@@ -93,10 +98,14 @@ class App extends React.Component {
   /** Toggle the timer.
   */
   handleClick() {
+    // If the timer is not running, start it and set a watcher on it.
     if (!this.state.isRunning) {
-      this.int = setInterval(() => this.setState({
-        time: this.state.time > 0 ? this.state.time - 1 : 0
-      }), 1000);
+      this.int = setInterval(() => {
+        this.setState({
+          time: this.state.time - 1
+        });
+        this.watchTimer();
+      }, 1000);
       this.setState({
         isRunning: true
       });
@@ -106,6 +115,59 @@ class App extends React.Component {
         isRunning: false
       });
     }
+  }
+  /** Check the state of the timer every second.
+  */
+  watchTimer() {
+    // If the time gets to 0 and we aren't in a break, set a break.
+    if (this.state.time === 0) {
+      if (!this.state.isBreak) {
+        switch (this.state.checkmarks) {
+          case 0 :
+            this.setState({
+              time: this.state.shortBreak,
+              isBreak: true,
+              checkmarks: 1
+            });
+            break;
+          case 1 :
+            this.setState({
+              time: this.state.shortBreak,
+              isBreak: true,
+              checkmarks: 2
+            });
+            break;
+          case 2 :
+            this.setState({
+              time: this.state.shortBreak,
+              isBreak: true,
+              checkmarks: 3
+            });
+            break;
+          case 3 :
+            this.setState({
+              time: this.state.shortBreak,
+              isBreak: true,
+              checkmarks: 4
+            });
+            break;
+          case 4 :
+            this.setState({
+              time: this.state.longBreak,
+              isBreak: true,
+              checkmarks: 0
+            });
+            break;
+          default :
+            return;
+        } // switch
+      } else {
+        this.setState({
+          time: this.userTime,
+          isBreak: false
+        });
+      }
+    } // time === 0 if
   }
   render() {
     return (
