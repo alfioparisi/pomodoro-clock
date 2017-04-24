@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Arvo:400,700');
+
 * {
   box-sizing: border-box;
 }
@@ -15,20 +17,32 @@ body {
   flex-wrap: wrap;
 }
 
+/*************************************/
+/* Header */
+
+.main-header {
+  display: flex;
+  flex-direction: column;
+}
+
 h1 {
   border-bottom: 3px solid rgba(240, 0, 0, 0.64);
-  margin-left: 20px;
+  margin-left: 17px;
 }
+
+/****************************************************/
+/* Timer */
 
 .timer-container {
   position: relative;
+  margin: 0 auto;
 }
 
 .timer {
-  width: 100vw;
-  height: 100vw;
-  font-size: 50px;
-  line-height: 100vw;
+  width: 80vw;
+  height: 80vw;
+  font-size: 35px;
+  line-height: 80vw;
   text-align: center;
   color: rgb(85, 176, 97);
   text-shadow: 1px 1px 4px black;
@@ -37,12 +51,35 @@ h1 {
   background: linear-gradient(to left, rgba(240, 0, 0, 0.64) , rgba(220, 40, 30, 0.96));
   /* gradients from https://uigradients.com/# */
   border-radius: 50%;
+  will-change: transform;
+  transition: box-shadow 500ms ease;
 }
 
-.task {
-  margin-left: 15px;
-  width: 100%;
+.checkmark-1 {
+  box-shadow: inset 0 0 0 8px #db6053;
 }
+.checkmark-2 {
+  box-shadow: inset 0 0 0 8px #db6053, inset 0 0 0 16px #8cbc93;
+}
+.checkmark-3 {
+  box-shadow: inset 0 0 0 8px #db6053, inset 0 0 0 16px #8cbc93, inset 0 0 0 24px #db6053;
+}
+.checkmark-4 {
+  box-shadow: inset 0 0 0 8px #db6053, inset 0 0 0 16px #8cbc93, inset 0 0 0 24px #db6053, inset 0 0 0 32px #8cbc93;
+}
+
+.msg {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  bottom: 10%;
+  font-size: 25px;
+  text-align: center;
+  color: #212622;
+}
+
+/******************************************************/
+/* Form */
 
 input {
   padding-left: 5px;
@@ -75,32 +112,4 @@ button[type='submit'] {
   height: 40px;
   margin-left: 10px;
   margin-bottom: 0;
-}
-
-.checkmark {
-  position: absolute;
-  width: 30%;
-  height: 15px;
-  background-color: rgba(255, 255, 255, 0.68);
-  opacity: 0;
-}
-
-.check-first {
-  bottom: 34%;
-  left: 10%;
-}
-
-.check-second {
-  bottom: 34%;
-  left: 58%;
-}
-
-.check-third {
-  bottom: 24%;
-  left: 17%;
-}
-
-.check-fourth {
-  bottom: 24%;
-  left: 52%;
 }

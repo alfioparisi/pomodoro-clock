@@ -1,9 +1,10 @@
 import React from 'react';
+import classNames from 'classnames';
 import './App.css';
 
 function Header(props) {
   return (
-    <header>
+    <header className="main-header" >
       <h1>Pomodoro Clock</h1>
       <form onSubmit={props.onSubmit} >
         <label>Set your time : </label>
@@ -15,10 +16,12 @@ function Header(props) {
           onChange={(evt, time) => props.changeTime(evt, 'time')}
           // If the timer is on, disable the input.
           disabled={props.isRunning ? true : false} />
+        <hr />
         <label>Short break </label>
         <input type="number" step="1" placeholder="5"
          onChange={(evt, time) => props.changeTime(evt, 'shortBreak')}
          disabled={props.isRunning ? true : false} />
+        <hr />
         <label>Long break </label>
         <input type="number" step="1" placeholder="15"
          onChange={(evt, time) => props.changeTime(evt, 'longBreak')}
@@ -32,7 +35,8 @@ function Header(props) {
 function Pomodoro(props) {
   return (
     <section className="timer-container">
-      <div className="timer">{props.time}</div>
+      <div className={props.checkmarkClass}>{props.time}</div>
+      <div className="msg">{props.msg}</div>
     </section>
   );
 }
@@ -170,11 +174,20 @@ class App extends React.Component {
     } // time === 0 if
   }
   render() {
+    const msg = this.state.isRunning ? this.state.isBreak ? 'Break' : 'Work to do' : '';
+    const checkmarkClass = classNames({
+      'timer': true,
+      'checkmark-1': this.state.checkmarks === 1,
+      'checkmark-2': this.state.checkmarks === 2,
+      'checkmark-3': this.state.checkmarks === 3,
+      'checkmark-4': this.state.checkmarks === 4
+    });
     return (
       <div className="container">
         <Header onSubmit={this.handleSubmit} isRunning={this.state.isRunning}
           time={this.state.time} changeTime={(evt, val) => this.changeTime(evt, val)} />
-        <Pomodoro time={this.state.time} />
+        <Pomodoro time={this.state.time} isRunning={this.state.isRunning} msg={msg}
+        checkmarkClass={checkmarkClass} />
         <Footer isRunning={this.state.isRunning} onClick={this.handleClick} />
       </div>
     );
